@@ -31,14 +31,25 @@ class Appliances
 	bool conditions;
 public:
 	Appliances() = default;
-	Appliances(string N, double P, unsigned int Q, bool S, bool C)
-	{
-		name = N;
-		power = P;
-		qty = Q;
-		status = S;
-		conditions = C;
-	}
+	Appliance(string N, double P, bool S, bool C) : name(N), power(P), status(S), condition(C)
+       {
+	 void setStatus(bool newStatus) 
+	 {
+	    status = newStatus;
+	 }
+         string getName() const 
+	 {   
+	    return name;
+         }
+
+         bool getStatus() const 
+         {
+           return status;
+         }
+   
+       }
+
+  
 	// member functions here
 	// Report function
 	void report()  // edit
@@ -89,18 +100,18 @@ public:
 	{
 		appliances.push_back(inputAppliance());
 	}
-	void currentStatus()
-	{
-		cout << "Current Status of Appliances in Room " << name << ":" << endl;
-		for (unsigned int i = 0; i < appliances.size(); ++i)
-		{
-			cout << "Appliance: " << setw(20) << left << appliances[i].name << " - Status: ";
-			if (appliances[i].status)
-				cout << setw(5) << right << "On" << endl;
-			else
-				cout << setw(5) << right << "Off" << endl;
-		}
+
+        void currentStatus() const 
+        {
+	     cout << "Current Status of Appliances in Room " << name << ":" << endl;
+             for (int i = 0; i < appliances.size(); ++i) 
+	     {
+	         cout << "Appliance: " << setw(20) << left << appliances[i].getName() << " - Status: ";
+                 cout << (appliances[i].getStatus() ? "On" : "Off") << endl;
+	     }      
 	}
+       
+    
 	void report() // add synonymous function to other classes as well
 	{
 		for (int i = 0; i < appliances.size(); i++)
